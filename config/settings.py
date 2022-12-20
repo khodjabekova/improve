@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    
+
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'accounts.authenticate.CustomAuthentication'
@@ -196,7 +196,8 @@ CORS_ALLOW_HEADERS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
-CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken', 'Access-Control-Allow-Origin']
+CORS_EXPOSE_HEADERS = ['Content-Type',
+                       'X-CSRFToken', 'Access-Control-Allow-Origin']
 SECURE_BROWSER_XSS_FILTER = True
 
 SIMPLE_JWT = {

@@ -1,13 +1,10 @@
-from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
-
 from accounts.models import CustomUser
 
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-
 
     class Meta:
         model = CustomUser
@@ -19,8 +16,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['username', 'password']
-
-
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -48,10 +43,12 @@ class ChangePasswordSerializer(serializers.Serializer):
             raise serializers.ValidationError({'old_password': 'not found'})
 
         if not instance.check_password(validated_data['old_password']):
-            raise serializers.ValidationError({'old_password': 'wrong password'})
+            raise serializers.ValidationError(
+                {'old_password': 'wrong password'})
 
         if validated_data['new_password'] != validated_data['confirm_password']:
-            raise serializers.ValidationError({'passwords': 'passwords do not match'})
+            raise serializers.ValidationError(
+                {'passwords': 'passwords do not match'})
 
         if validated_data['new_password'] == validated_data['confirm_password'] and instance.check_password(
                 validated_data['old_password']):
